@@ -13,15 +13,18 @@ def load_data():
     y = iris.target
     return X, y
 
+
 def split_data(X, y, test_size=0.2):
     """Split the dataset into training and testing sets."""
     return train_test_split(X, y, test_size=test_size, random_state=42)
+
 
 def train_model(X_train, y_train, max_iter=200):
     """Train the Logistic Regression model."""
     model = LogisticRegression(max_iter=max_iter)
     model.fit(X_train, y_train)
     return model
+
 
 def evaluate_model(model, X_test, y_test):
     """Evaluate the model's accuracy."""
@@ -51,16 +54,20 @@ def main():
         print(f"Model accuracy: {score}")
 
         # Log parameters and metrics
-        mlflow.log_param('max_iter', 200)
-        mlflow.log_metric('accuracy', score)
+        mlflow.log_param("max_iter", 200)
+        mlflow.log_metric("accuracy", score)
 
         #  Log and register the model with input example and signature
         input_example = X_test[:5]  # A few example inputs
         signature = infer_signature(X_test, model.predict(X_test))
-        
-        mlflow.sklearn.log_model(model, 'model', signature=signature, input_example=input_example)
-        mlflow.register_model(f'runs:/{mlflow.active_run().info.run_id}/model', 'IrisClassifier')
+
+        mlflow.sklearn.log_model(
+            model, "model", signature=signature, input_example=input_example
+        )
+        mlflow.register_model(
+            f"runs:/{mlflow.active_run().info.run_id}/model", "IrisClassifier"
+        )
+
 
 if __name__ == "__main__":
     main()
-

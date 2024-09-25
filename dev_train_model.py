@@ -5,7 +5,7 @@ from sklearn.datasets import load_iris
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from mlflow.models.signature import infer_signature
-    
+
 
 # COMMAND ----------
 
@@ -35,13 +35,16 @@ with mlflow.start_run():
     print(f"Model accuracy: {score}")
 
     # Log parameters and metrics
-    mlflow.log_param('max_iter', 200)
-    mlflow.log_metric('accuracy', score)
+    mlflow.log_param("max_iter", 200)
+    mlflow.log_metric("accuracy", score)
 
     #  Log and register the model with input example and signature
     input_example = X_test[:5]  # A few example inputs
     signature = infer_signature(X_test, model.predict(X_test))
-    
-    mlflow.sklearn.log_model(model, 'model', signature=signature, input_example=input_example)
-    mlflow.register_model(f'runs:/{mlflow.active_run().info.run_id}/model', 'IrisClassifier')
 
+    mlflow.sklearn.log_model(
+        model, "model", signature=signature, input_example=input_example
+    )
+    mlflow.register_model(
+        f"runs:/{mlflow.active_run().info.run_id}/model", "IrisClassifier"
+    )

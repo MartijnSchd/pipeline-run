@@ -1,3 +1,8 @@
+import os
+import sys
+# set work dir to include parent dir
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)))
 from train_model import load_data, split_data, train_model, evaluate_model
 from sklearn.linear_model import LogisticRegression
 import numpy as np

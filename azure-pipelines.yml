@@ -1,0 +1,25 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  DATABRICKS_HOST: 'https://adb-751897816546027.7.azuredatabricks.net'
+  DATABRICKS_JOB_ID: '177245387770747' 
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+
+- script: |
+    pip install databricks-cli
+  displayName: 'Install Databricks CLI'
+
+- script: |
+    export DATABRICKS_HOST=$(DATABRICKS_HOST)
+    export DATABRICKS_TOKEN=$(DATABRICKS_TOKEN)
+    databricks jobs run-now --job-id $(DATABRICKS_JOB_ID)
+  displayName: 'Trigger Databricks Job'

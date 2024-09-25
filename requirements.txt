@@ -2,7 +2,6 @@ mlflow
 scikit-learn
 pytest
 pytest-cov
-pytest-xml
 flake8
 black
 mypy

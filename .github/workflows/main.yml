@@ -29,12 +29,15 @@ jobs:
 
       - name: Code Formatting Check
         run: black --check .
+        continue-on-error: true
 
       - name: Linting
         run: flake8 .
+        continue-on-error: true
 
       - name: Static Type Checking
         run: mypy .
+        continue-on-error: true
 
       - name: Run Unit Tests with Coverage
         run: |

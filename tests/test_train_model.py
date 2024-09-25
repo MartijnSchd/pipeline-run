@@ -1,4 +1,3 @@
-import pytest
 from train_model import load_data, split_data, train_model, evaluate_model
 from sklearn.linear_model import LogisticRegression
 import numpy as np

@@ -7,6 +7,8 @@ from mlflow.models.signature import infer_signature
 
 
 def main():
+    experiment_name = "/Shared/IrisExperiment"  # You can choose any valid path
+    mlflow.set_experiment(experiment_name)
     with mlflow.start_run():
         # Set a description for the run
         mlflow.set_tag("description", "Logistic Regression model for the Iris dataset")

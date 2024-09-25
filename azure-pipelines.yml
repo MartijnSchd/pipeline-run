@@ -4,7 +4,7 @@ trigger:
       - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: Default
 
 variables:
   DATABRICKS_HOST: 'https://adb-751897816546027.7.azuredatabricks.net'

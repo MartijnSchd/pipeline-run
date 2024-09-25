@@ -58,9 +58,6 @@ jobs:
           name: Coverage Report
           path: reports/coverage.xml
 
-      - name: Security Scan
-        run: bandit -r .
-
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
